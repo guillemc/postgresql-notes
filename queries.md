@@ -41,6 +41,32 @@ array_to_json(array_agg(at.tag ORDER BY tag)) AS tags
 ```
 (Then, in our php client code, for example, we'd do `$tags = json_decode($row->tags)`)
 
+#### Dealing with nulls
+
+The `coalesce` function returns the first value that is not null:
+```
+SELECT id, coalesce(short_title, title) AS title FROM articles ORDER BY coalesce(short_title, title)
+```
+
+The `nullif(v1, v2)` function returns null if v1 equals v2 (and v1 otherwise).
+
+We can use it to convert empty strings to null:
+```
+SELECT id, coalesce(nullif(short_title, ''), title) AS title FROM articles
+```
+
+
+#### Ordering by cases
+
+The simple form is `CASE expression WHEN value THEN result [WHEN... THEN...] ELSE default_result END`:
+```
+SELECT id, name FROM countries ORDER BY CASE code WHEN 'ES' THEN 1 WHEN 'PT' THEN 1 ELSE 2 END, name
+```
+
+The general form is `CASE WHEN condition THEN result [WHEN... THEN...] ELSE default_result END`:
+```
+SELECT id, name FROM countries ORDER BY CASE WHEN code = ANY('{"ES", "PT"}') THEN 1 ELSE 2 END, name
+```
 
 
 ### Inserts
