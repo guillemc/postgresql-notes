@@ -21,18 +21,25 @@ GROUP BY a.id
 
 The array can be ordered:
 ```
-array_agg(at.tag ORDER BY tag)
+array_agg(at.tag ORDER BY tag) AS tags
 ```
 
 And converted to a string:
 ```
-array_to_string(array_agg(at.tag ORDER BY tag), ', ')
+array_to_string(array_agg(at.tag ORDER BY tag), ', ') AS tags
 ```
 
 This can be done at once with `string_agg`:
 ```
-string_agg(at.tag, ', ' ORDER BY tag)
+string_agg(at.tag, ', ' ORDER BY tag) AS tags
 ```
+
+In our client code most likely we'll receive arrays as strings.
+When we need to work with an array in our client code, we can use `array_to_json`:
+```
+array_to_json(array_agg(at.tag ORDER BY tag)) AS tags
+```
+(Then, in our php client code, for example, we'd do `$tags = json_decode($row->tags)`)
 
 
 
