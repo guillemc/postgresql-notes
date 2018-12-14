@@ -1,6 +1,39 @@
 Query Examples
 ==============
 
+### Selects
+
+#### Mysql's group_concat equivalent
+
+We can use `array_agg`, which groups results into an array:
+
+```
+SELECT a.id, a.title, array_agg(at.tag) AS tags
+FROM articles a LEFT JOIN article_tag at ON at.article_id = a.id
+GROUP BY a.id
+```
+
+----
+| id  | title       | tags |
+| --- | ----------- | ---- |
+| 36  | The National | {"indie rock",country-rock,folk-rock} |
+| 37  | Hinds        | {NULL} |
+----
+
+The array can be ordered:
+```
+array_agg(at.tag ORDER BY tag)
+```
+
+And converted to a string:
+```
+array_to_string(array_agg(at.tag ORDER BY tag), ', ')
+```
+
+This can be done at one with `string_agg`:
+```
+string_agg(at.tag, ', ' ORDER BY tag)
+```
 
 
 
