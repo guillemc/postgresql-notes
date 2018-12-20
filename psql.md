@@ -37,6 +37,12 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
 VACUUM FREEZE;
 ```
 
+### Renaming databases
+
+```
+ALTER DATABASE mydb RENAME TO newdb;
+```
+
 
 ### Exporting and importing databases
 
