@@ -52,3 +52,10 @@ $ psql mynewdb < mydb.sql
 ```
 
 Note: `mynewdb` must be an empty database.
+
+
+### Checking installed version
+
+We can do `psql --version` or execute the query `select version();`
+
+
