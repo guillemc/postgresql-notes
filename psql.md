@@ -58,4 +58,24 @@ Note: `mynewdb` must be an empty database.
 
 We can do `psql --version` or execute the query `select version();`
 
+### Table maintenance
+
+Plain vacuum frees up space:
+
+```
+VACUUM mytable;
+```
+
+Full vacuum can reclaim more space, but locks the table and takes longer:
+
+```
+VACUUM(FULL) mytable;
+```
+
+Full vacuum + analyze will also update stats used for query efficiency:
+
+```
+VACUUM(FULL, ANALYZE) mytable;
+```
+
 
