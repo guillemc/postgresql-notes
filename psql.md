@@ -60,6 +60,12 @@ We can do `psql --version` or execute the query `select version();`
 
 ### Table maintenance
 
+Restarting sequences:
+
+```
+ALTER SEQUENCE users_id_seq RESTART WITH 1;
+```
+
 Plain vacuum frees up space:
 
 ```
