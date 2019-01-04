@@ -86,6 +86,19 @@ ON CONFLICT (source) DO UPDATE SET destination = excluded.destination, updated_a
 
 
 ### Updates
+
+#### Update with join
+
+Example - uploads table with duplicate paths, for each path we want to keep the one with the highest id and mark the others for deletion:
+
+```
+UPDATE uploads u SET is_temp = true 
+FROM uploads u2    
+WHERE
+    u.path = u2.path    
+    AND u.id < u2.id
+```
+
 #### Update multiple rows with different values
 
 Example - we receive a list tuples with (id, position) and update all rows at once:
