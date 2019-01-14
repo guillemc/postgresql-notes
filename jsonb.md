@@ -57,6 +57,14 @@ Using the containment operator we can also search for elements inside arrays:
 SELECT * FROM banners WHERE config @> '{"tags": ["tv"]}';
 ```
 
+This operator can also be used to search inside a json array for objects with a certain partial structure:
+
+```
+SELECT * FROM pages WHERE modules @> '[{"type":"image"}]';
+```
+
+(here `modules` is a jsonb field which contains an array of objects of different "type" values, plus specific key/values for each type)
+
 
 ### Checking key existence / absence
 
