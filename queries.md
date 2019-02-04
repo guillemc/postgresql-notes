@@ -83,6 +83,12 @@ VALUES (?, ?, ?, ?)
 ON CONFLICT (source) DO UPDATE SET destination = excluded.destination, updated_at = excluded.updated_at
 ```
 
+In case the constraint is on a combination of fields, we'll use the constraint's name:
+```
+INSERT INTO translations (source, language, destination, created_at, updated_at)
+VALUES (?, ?, ?, ?, ?)
+ON CONFLICT ON CONSTRAINT translations_source_language_unique DO UPDATE SET updated_at = excluded.updated_at
+```
 
 
 ### Updates
