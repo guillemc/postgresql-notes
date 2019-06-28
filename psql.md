@@ -54,6 +54,12 @@ $ psql mynewdb < mydb.sql
 Note: `mynewdb` must be an empty database.
 
 
+### Export a table or query to csv
+
+```
+\copy (select * from properties_export) TO '/tmp/properties_export.csv' CSV HEADER
+```
+
 ### Checking installed version
 
 We can do `psql --version` or execute the query `select version();`
