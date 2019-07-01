@@ -63,7 +63,15 @@ Note: `mynewdb` must be an empty database.
 ### Export a table or query to csv
 
 ```
-\copy (select * from properties_export) TO '/tmp/properties_export.csv' CSV HEADER
+COPY (select * from properties_export) TO '/tmp/export.csv' WITH (FORMAT csv, HEADER)
+COPY (select * from properties_export) TO PROGRAM 'gzip > /tmp/export.csv.gzip' WITH (FORMAT csv, HEADER, DELIMITER ';')
+```
+The copy command requires the user to be superuser. 
+
+There's also the equivalent psql \copy meta-command:
+
+```
+\copy (select * from properties_export) TO '/tmp/export.csv' WITH (FORMAT csv, HEADER)
 ```
 
 ### Checking installed version
