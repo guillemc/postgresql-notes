@@ -37,6 +37,12 @@ UPDATE pg_database SET datistemplate = TRUE WHERE datname = 'template1';
 VACUUM FREEZE;
 ```
 
+If user needs to have superuser privileges:
+```
+ALTER USER tom WITH SUPERUSER;
+ALTER USER tom WITH NOSUPERUSER;
+```
+
 ### Renaming databases
 
 ```
