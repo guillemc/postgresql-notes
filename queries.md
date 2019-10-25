@@ -74,7 +74,12 @@ SELECT id, name FROM countries ORDER BY CASE WHEN code = ANY('{"ES", "PT"}') THE
 
 #### Insert / update on key error
 
-This would be the equivalent for Mysql's `insert on duplicate ket update`:
+This would be the equivalent for Mysql's `insert on duplicate key update`.
+
+Simplest case - ignore conflicts:
+```
+INSERT INTO street_names (id, name) SELECT gml_id, address_text FROM addresses ON CONFLICT DO NOTHING
+```
 
 Example - table that stores redirections, where `source` is a column with an unique index:
 ```
