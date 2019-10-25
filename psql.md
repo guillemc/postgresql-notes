@@ -103,6 +103,16 @@ Full vacuum + analyze will also update stats used for query efficiency:
 ```
 VACUUM(FULL, ANALYZE) mytable;
 ```
+### Tables
+
+```
+CREATE TABLE IF NOT EXISTS street_names (
+  id SERIAL PRIMARY KEY,
+  gml_id VARCHAR(30) NOT NULL UNIQUE,
+  name VARCHAR,
+  code CHARACTER(5) NOT NULL
+);
+```
 
 ### Schemas
 
