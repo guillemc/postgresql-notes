@@ -132,3 +132,15 @@ FROM (VALUES
 
 WHERE u2.id = u.id;
 ```
+
+
+#### Regular expressions
+
+```
+UPDATE docs SET filepath = REGEXP_REPLACE(filepath, '^(.*?)documents\\(.*?)\\(.*?)(\\.*?\.pdf)?$','\2/\3');
+```
+
+SIMILAR TO is more powerful than LIKE, and simpler than regular expressions:
+```
+SELECT table_name FROM information_schema.tables WHERE table_schema = 'upload' AND table_name SIMILAR TO '[0-9]{5}' ORDER BY table_name;
+```
