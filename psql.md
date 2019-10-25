@@ -104,4 +104,22 @@ Full vacuum + analyze will also update stats used for query efficiency:
 VACUUM(FULL, ANALYZE) mytable;
 ```
 
+### Schemas
 
+```
+CREATE SCHEMA upload;
+
+GRANT ALL on schema upload to testgis;
+
+ALTER TABLE upload.cities SET SCHEMA public;
+```
+
+Set the search_path at runtime:
+```
+SET search_path = upload;
+````
+
+Permanently set the search path for a user:
+```
+ALTER USER admin SET search_path = upload, public;
+```
