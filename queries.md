@@ -137,6 +137,8 @@ WHERE u2.id = u.id;
 #### Regular expressions
 
 ```
+UPDATE list_from_csv SET lastfield = REGEXP_REPLACE(lastfield, '[\r]', '');
+
 UPDATE docs SET filepath = REGEXP_REPLACE(filepath, '^(.*?)documents\\(.*?)\\(.*?)(\\.*?\.pdf)?$','\2/\3');
 ```
 
