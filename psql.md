@@ -133,3 +133,13 @@ Permanently set the search path for a user:
 ```
 ALTER USER admin SET search_path = upload, public;
 ```
+
+### Killing long queries
+
+```
+select pid, usename, query from pg_stat_activity where state = 'active';
+
+-- take note of the pid, for example: 29458
+
+select pg_terminate_backend(29458);
+```
