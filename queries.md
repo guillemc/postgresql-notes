@@ -146,3 +146,16 @@ SIMILAR TO is more powerful than LIKE, and simpler than regular expressions:
 ```
 SELECT table_name FROM information_schema.tables WHERE table_schema = 'upload' AND table_name SIMILAR TO '[0-9]{5}' ORDER BY table_name;
 ```
+
+
+#### Update from a CTE (common table expression)
+
+```
+WITH cte AS (
+    SELECT * FROM ...
+)
+UPDATE table_to_update
+SET column_from_table_to_update = cte.some_column
+FROM cte
+WHERE table_to_update.id = cte.id
+```
