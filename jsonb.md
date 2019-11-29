@@ -23,6 +23,17 @@ Removing a key:
 UPDATE banners SET config = config - 'tags' ;
 ```
 
+### Setting a nested value
+
+```
+WITH cte AS
+(select id, name, config->'options'->'source'->>'url' AS url from layers where config->'options'->'source'->>'url' like 'http://site1.com%')
+UPDATE layers
+SET config = jsonb_set(config, '{"options", "source", "url"}'::text[], to_jsonb(replace(cte.url, 'http://site1.com', 'https://site2.com')), false)
+FROM cte
+WHERE layers.id = cte.id
+```
+
 ### Getting values
 
 ```
